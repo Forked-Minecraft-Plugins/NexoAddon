@@ -56,6 +56,10 @@ public class SkullUtil {
             trySetNoteBlockSound(meta, component.getNoteBlockSound().soundId());
           }
 
+          // force itemName to show it
+          if(item.getItemName() != null)
+            meta.displayName(item.getItemName());
+
           itemStack.setItemMeta(meta);
           ItemBuilder itemBuilder =  new ItemBuilder(itemStack);
 
