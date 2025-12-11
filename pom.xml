@@ -144,10 +144,6 @@
             <url>https://repo.nexomc.com/releases</url>
         </repository>
         <repository>
-            <id>jeff-media-public</id>
-            <url>https://repo.jeff-media.com/public/</url>
-        </repository>
-        <repository>
             <id>nexus</id>
             <name>Lumine Releases</name>
             <url>https://mvn.lumine.io/repository/maven-public/</url>
@@ -215,12 +211,6 @@
             <artifactId>exp4j</artifactId>
             <version>0.4.8</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>SpigotUpdateChecker</artifactId>
-            <version>3.0.4</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.lumine</groupId>
