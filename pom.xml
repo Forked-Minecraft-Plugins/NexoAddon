@@ -88,7 +88,7 @@
                     </artifactSet>
                     <filters>
                         <filter>
-                            <artifact>com.github.technicallycoded:FoliaLib</artifact>
+                            <artifact>com.tcoded:FoliaLib</artifact>
                             <includes>
                                 <include>**</include>
                             </includes>
