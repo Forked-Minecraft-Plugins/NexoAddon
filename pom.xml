@@ -12,7 +12,7 @@
     <name>NexoAddon</name>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -88,7 +88,7 @@
                     </artifactSet>
                     <filters>
                         <filter>
-                            <artifact>com.github.technicallycoded:FoliaLib</artifact>
+                            <artifact>com.tcoded:FoliaLib</artifact>
                             <includes>
                                 <include>**</include>
                             </includes>
