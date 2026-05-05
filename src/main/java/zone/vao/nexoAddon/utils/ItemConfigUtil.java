@@ -3,10 +3,7 @@ package zone.vao.nexoAddon.utils;
 import com.nexomc.nexo.api.NexoItems;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Particle;
-import org.bukkit.Registry;
+import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
@@ -166,13 +163,16 @@ public class ItemConfigUtil {
       int radius = section.getInt("Mechanics.bigmining.radius", 1);
       int depth = section.getInt("Mechanics.bigmining.depth", 1);
       boolean switchable = section.getBoolean("Mechanics.bigmining.switchable", false);
+      String soundRaw = section.getString("Mechanics.bigmining.sound", "block.stone.break");
       List<Material> materials = new ArrayList<>();
       for (String s : section.getStringList("Mechanics.bigmining.materials")) {
         Material material = Material.matchMaterial(s);
         if(material != null) materials.add(material);
       }
 
-      mechanic.setBigMining(radius, depth, switchable, materials);
+      Sound sound = Registry.SOUNDS.get(soundRaw.contains(":") ? NamespacedKey.fromString(soundRaw) : NamespacedKey.minecraft(soundRaw));
+
+      mechanic.setBigMining(radius, depth, switchable, materials, sound);
     }
   }
 
@@ -205,7 +205,9 @@ public class ItemConfigUtil {
       double probability = section.getDouble("Mechanics.bedrockbreak.probability");
       int durabilityCost = section.getInt("Mechanics.bedrockbreak.durability_cost", 1);
       boolean disableOnFirstLayer = section.getBoolean("Mechanics.bedrockbreak.disable_on_first_layer", true);
-      mechanic.setBedrockBreak(hardness, probability, durabilityCost, disableOnFirstLayer);
+      String soundRaw = section.getString("Mechanics.bedrockbreak.sound", "block.stone.break");
+      Sound sound = Registry.SOUNDS.get(soundRaw.contains(":") ? NamespacedKey.fromString(soundRaw) : NamespacedKey.minecraft(soundRaw));
+      mechanic.setBedrockBreak(hardness, probability, durabilityCost, disableOnFirstLayer, sound);
     }
   }
 

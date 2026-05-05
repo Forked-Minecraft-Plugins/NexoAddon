@@ -175,6 +175,13 @@ public final class NexoAddon extends JavaPlugin {
       Set<String> itemNames = NexoItems.itemNames();
       return new ArrayList<>(itemNames);
     });
+
+    manager.getCommandCompletions().registerCompletion("sounds", c -> {
+
+      return Registry.SOUNDS.keyStream()
+          .map(NamespacedKey::toString)
+          .toList();
+    });
   }
 
   public void initializePopulators() {
