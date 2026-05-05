@@ -49,7 +49,6 @@ import zone.vao.thirdparties.updatechecker.UpdateChecker;
 
 import java.io.File;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Getter
 public final class NexoAddon extends JavaPlugin {
