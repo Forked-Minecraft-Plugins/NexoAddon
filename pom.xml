@@ -172,7 +172,7 @@
         <dependency>
             <groupId>ca.bkaw</groupId>
             <artifactId>paper-nms</artifactId>
-            <version>26.1.2.build.59-stable-SNAPSHOT</version>
+            <version>26.1.2.build.63-stable-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
