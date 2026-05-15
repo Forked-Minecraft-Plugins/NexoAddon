@@ -51,17 +51,19 @@ public class TotemUtil {
                 (byte) 35
         );
 
-      Sound sound1 = Sounds.getByNameOrCreate(sound);
+        if(sound != null) {
+            Sound sound1 = Sounds.getByNameOrCreate(sound);
 
-      WrapperPlayServerSoundEffect soundEffectPacket = new WrapperPlayServerSoundEffect(
-          sound1,
-          SoundCategory.AMBIENT,
-          new Vector3i(player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ()),
-          1f,
-          1f
-      );
+            WrapperPlayServerSoundEffect soundEffectPacket = new WrapperPlayServerSoundEffect(
+                    sound1,
+                    SoundCategory.AMBIENT,
+                    new Vector3i(player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ()),
+                    1f,
+                    1f
+            );
 
-        PacketEvents.getAPI().getPlayerManager().sendPacket(player, soundEffectPacket);
+            PacketEvents.getAPI().getPlayerManager().sendPacket(player, soundEffectPacket);
+        }
         PacketEvents.getAPI().getPlayerManager().sendPacket(player, setSlotPacket);
         PacketEvents.getAPI().getPlayerManager().sendPacket(player, entityStatusPacket);
 
