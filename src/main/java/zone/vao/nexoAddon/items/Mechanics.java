@@ -126,8 +126,8 @@ public class Mechanics {
     this.inventoryType = new InventoryType(inventoryType, title);
   }
 
-  public void setLifesteal(int amount) {
-    this.lifesteal = new Lifesteal(amount);
+  public void setLifesteal(int amount, double cooldown) {
+    this.lifesteal = new Lifesteal(amount, cooldown);
   }
 
   public static void registerListeners(NexoAddon plugin){

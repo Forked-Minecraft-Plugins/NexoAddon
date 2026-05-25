@@ -7,6 +7,7 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
@@ -14,9 +15,14 @@ import org.bukkit.inventory.ItemStack;
 import zone.vao.nexoAddon.NexoAddon;
 import zone.vao.nexoAddon.items.Mechanics;
 
-public record Lifesteal(int amount) {
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
+public record Lifesteal(int amount, double cooldown) {
     public static class LifestealListener implements Listener {
-        @EventHandler
+        private static final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
+        @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
         public void on(EntityDamageByEntityEvent event) {
             if (!(event.getDamager() instanceof LivingEntity attacker))
                 return;
@@ -41,12 +47,23 @@ public record Lifesteal(int amount) {
             if (mechanic == null)
                 return;
 
+            if (mechanic.cooldown() > 0) {
+                long now = System.currentTimeMillis();
+                if (cooldowns.containsKey(attacker.getUniqueId()) && cooldowns.get(attacker.getUniqueId()) > now) {
+                    return;
+                }
+            }
+
             AttributeInstance maxHealthAttr = attacker.getAttribute(Attribute.MAX_HEALTH);
             if (maxHealthAttr == null) return;
             double maxHealth = maxHealthAttr.getValue();
 
             attacker.setHealth(Math.min(attacker.getHealth() + mechanic.amount(), maxHealth));
             livingEntity.setHealth(Math.max(livingEntity.getHealth() - mechanic.amount(), 0));
+
+            if (mechanic.cooldown() > 0) {
+                cooldowns.put(attacker.getUniqueId(), System.currentTimeMillis() + (long) (mechanic.cooldown() * 1000L));
+            }
         }
     }
 }

@@ -486,7 +486,7 @@ public class ItemConfigUtil {
   private static void loadLifesteal(ConfigurationSection section, Mechanics mechanic) {
     if (!section.contains("Mechanics.lifesteal")) return;
 
-    mechanic.setLifesteal(section.getInt("Mechanics.lifesteal.amount", 1));
+    mechanic.setLifesteal(section.getInt("Mechanics.lifesteal.amount", 1), section.getDouble("Mechanics.lifesteal.cooldown", 0.0));
   }
 
   private static void parseItemList(List<String> rawItems, List<Material> materials, List<String> nexoIds) {
