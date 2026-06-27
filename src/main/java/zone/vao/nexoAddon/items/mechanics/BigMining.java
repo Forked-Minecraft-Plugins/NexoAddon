@@ -136,7 +136,6 @@ public record BigMining(int radius, int depth, boolean switchable, List<Material
           handleAttemptBlockBreak(player, block, tool, mechanic, blockMaterial, isLiquid, canBreak, blockLocation);
         });
       }
-
     }
 
     private static void handleAttemptBlockBreak(Player player, Block block, ItemStack tool, BigMining mechanic, Material blockMaterial, boolean isLiquid, boolean canBreak, Location blockLocation) {
